@@ -9,12 +9,18 @@ import config
 ==================================================================    
 '''
 
-embarque = threading.Semaphore(1)
+embarque = threading.Semaphore(0)
+desembarque = threading.Semaphore(0)
 
 ordemEmbarque = [threading.Semaphore(0) for i in range(0, config.m)]
 ordemEmbarque[0].release()
 
 ordemDesmbarque = [threading.Semaphore(0) for i in range(0, config.m)]
 ordemDesmbarque[0].release()
+
+carroCheio = threading.Semaphore(0)
+
+ordemPassageiros = [threading.Semaphore(0) for i in range(0, config.n)]
+ordemPassageiros[0].release()
 
 printMsg = threading.Semaphore()

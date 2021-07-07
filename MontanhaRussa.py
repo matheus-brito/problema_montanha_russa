@@ -22,11 +22,8 @@ def criarPassageiros():
         passageiro = Passageiro(i)
         
         globais.fila.append(passageiro)
-        threading.Thread(target=passageiro.iniciar, args=()).start()
         globais.printMensagem("Passageiro " + str(i) + " chegou à fila.")
-
-        if(len(globais.fila) >= config.c):
-            semaforos.embarque.release()
+        threading.Thread(target=passageiro.iniciar, args=()).start()
         
         tp = random.randint(config.tpIntervalo[0], config.tpIntervalo[1])
         time.sleep(tp)

@@ -9,7 +9,8 @@ import globais
 class Carro:
     
     def __init__(self, id):
-        self.id= id
+        self.id = id
+        self.tempoPasseio = 0   #Tempo total de passeio deste carro
         globais.printMensagem("Carro " + str(self.id) + " está vazio.")
 
     def iniciar(self):
@@ -29,19 +30,26 @@ class Carro:
             semaforos.ordemDesmbarque[0 if self.id == config.m-1 else self.id+1].release()
             
     def aguardarEmbarque(self):
-        semaforos.embarque.acquire()
-        
-        for i in range (0, config.c):
-            globais.fila.pop(0)
+        semaforos.embarque.release(config.c)
         
         time.sleep(config.te)
+        
+        semaforos.carroCheio.acquire()
+        
         globais.printMensagem("Carro " + str(self.id) + " está cheio.")
         globais.printMensagem("Fila: " + str(globais.fila))
         
     def aguardarDesembarque(self):
+        semaforos.desembarque.release(config.c)
         time.sleep(config.te)
         globais.printMensagem("Carro " + str(self.id) + " está vazio.")
         
     def passear(self):
-        time.sleep(config.tm)
         globais.printMensagem("Carro " + str(self.id) + " inciou o passeio.")
+        
+        tempoInicioPasseio = time.time()
+        
+        time.sleep(config.tm)
+        
+        self.tempoPasseio += time.time() - tempoInicioPasseio
+        

@@ -9,7 +9,11 @@ import semaforos
 ===================================================================    
 '''
 
-fila = []                   # Número de cadeiras por carro
+fila = []                   # Fila de passageiros
+numPassageiros = 0          # Número de passageiros no carro atual
+tempoEsperaMinimo = None    # Tempo mínimo de espera na fila
+tempoEsperaMaximo = None    # Tempo máximo de espera na fila
+somaTempoEspera = 0         # Somatório dos tempos de espera na fila
 
 def printMensagem(mensagem):
     semaforos.printMsg.acquire()
