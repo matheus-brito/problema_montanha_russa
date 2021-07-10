@@ -20,16 +20,16 @@ class Passageiro:
             
             # passageiro embarca
             semaforos.embarque.acquire()
-            globais.numPassageiros += 1
+            globais.numPassageirosEmbarque += 1
             globais.fila.pop(0)
             
             globais.printMensagem("Passageiro " + str(self.id) + " embarca.")
             self.registrarTempoEspera()
             
             # se o carro está cheio, libera o semáforo carroCheio
-            if(globais.numPassageiros == config.c):
+            if(globais.numPassageirosEmbarque == config.c):
                 semaforos.carroCheio.release()
-                globais.numPassageiros = 0
+                globais.numPassageirosEmbarque = 0
             
             # próximo passageiro da fila pode embarcar
             if(self.id + 1 < config.n):
@@ -37,6 +37,13 @@ class Passageiro:
             
             # passageiro desembarca
             semaforos.desembarque.acquire()
+            
+            globais.numPassageirosDesembarque += 1
+            
+            # se todos desembarcaram, libera o semáforo carroVazio
+            if(globais.numPassageirosDesembarque == config.c):
+                semaforos.carroVazio.release()
+                globais.numPassageirosDesembarque = 0
     
     def registrarTempoEspera(self):
         tempoEspera = time.time() - self.tempoChegada

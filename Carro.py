@@ -41,7 +41,10 @@ class Carro:
         
     def aguardarDesembarque(self):
         semaforos.desembarque.release(config.c)
+        
         time.sleep(config.te)
+        
+        semaforos.carroVazio.acquire()
         globais.printMensagem("Carro " + str(self.id) + " está vazio.")
         
     def passear(self):
