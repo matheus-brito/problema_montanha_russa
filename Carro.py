@@ -37,7 +37,6 @@ class Carro:
         semaforos.carroCheio.acquire()
         
         globais.printMensagem("Carro " + str(self.id) + " está cheio.")
-        globais.printMensagem("Fila: " + str(globais.fila))
         
     def aguardarDesembarque(self):
         semaforos.desembarque.release(config.c)
@@ -55,4 +54,6 @@ class Carro:
         time.sleep(config.tm)
         
         self.tempoPasseio += time.time() - tempoInicioPasseio
+        
+        globais.printMensagem("Carro " + str(self.id) + " finalizou o passeio.")
         
