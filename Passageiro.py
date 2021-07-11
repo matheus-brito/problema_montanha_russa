@@ -40,10 +40,14 @@ class Passageiro:
             
             globais.numPassageirosDesembarque += 1
             
+            globais.printMensagem("Passageiro " + str(self.id) + " desembarca.")
+            
             # se todos desembarcaram, libera o semáforo carroVazio
             if(globais.numPassageirosDesembarque == config.c):
                 semaforos.carroVazio.release()
                 globais.numPassageirosDesembarque = 0
+            else:
+                semaforos.desembarque.release() # próximo passageiro pode desembarcar
     
     def registrarTempoEspera(self):
         tempoEspera = time.time() - self.tempoChegada

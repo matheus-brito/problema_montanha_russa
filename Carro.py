@@ -30,7 +30,7 @@ class Carro:
             semaforos.ordemDesmbarque[0 if self.id == config.m-1 else self.id+1].release()
             
     def aguardarEmbarque(self):
-        semaforos.embarque.release(config.c)
+        semaforos.embarque.release(config.c) # passageiros embarcam na ordem da fila
         
         time.sleep(config.te)
         
@@ -39,7 +39,7 @@ class Carro:
         globais.printMensagem("Carro " + str(self.id) + " está cheio.")
         
     def aguardarDesembarque(self):
-        semaforos.desembarque.release(config.c)
+        semaforos.desembarque.release()    # um passgeiro desembarca por vez em qualquer ordem
         
         time.sleep(config.te)
         
