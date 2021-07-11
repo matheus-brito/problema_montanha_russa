@@ -11,7 +11,7 @@ class Passageiro:
     
     def __init__(self, id):
         self.id = id
-        self.tempoChegada = time.time()  # Tempo de chegada deste passageiro à fila 
+        self.tempoChegada = time.time()  # tempo de chegada deste passageiro à fila 
         self.status = PassageiroStatus.fila
 
     def iniciar(self):

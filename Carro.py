@@ -10,19 +10,22 @@ class Carro:
     
     def __init__(self, id):
         self.id = id
-        self.tempoPasseio = 0   #Tempo total de passeio deste carro
+        self.tempoPasseio = 0   # tempo total de passeio deste carro
         globais.printMensagem("Carro " + str(self.id) + " está vazio.")
 
     def iniciar(self):
         while True:
+            # garante ordem dos carros
             semaforos.ordemEmbarque[self.id].acquire()
             
             self.aguardarEmbarque()
             
             semaforos.ordemEmbarque[0 if self.id == config.m-1 else self.id+1].release()
             
+            # inicia passeio
             self.passear()
             
+            # garante ordem dos carros
             semaforos.ordemDesmbarque[self.id].acquire()
             
             self.aguardarDesembarque()
