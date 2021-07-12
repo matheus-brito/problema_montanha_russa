@@ -10,7 +10,8 @@ class Carro:
     
     def __init__(self, id):
         self.id = id
-        self.tempoPasseio = 0   # tempo total de passeio deste carro
+        self.tempoInicio = time.time()  # tempo de início do funcionamento deste carro
+        self.tempoPasseio = 0           # tempo total de passeio deste carro
         globais.printMensagem("Carro " + str(self.id) + " está vazio.")
 
     def iniciar(self):

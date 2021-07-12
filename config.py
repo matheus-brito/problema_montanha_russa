@@ -11,4 +11,4 @@ tm = 10                 # Duração do passeio (s)
 tpIntervalo = [1, 3]    # Intervalo para obter tempo de chegada de passageiros à fila (s)
 te = 1                  # Tempo de embarque/desembarque
 n = 52                  # Número de passageiros
-m = 1                   # Número de carros
+m = 3                   # Número de carros

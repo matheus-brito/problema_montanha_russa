@@ -34,8 +34,17 @@ class MontanhaRussa:
         self.threadCriarPassageiros.join()
         
         semaforos.todosOsPassageirosAtendidos.acquire()
+        tempoFim = time.time()
         
-        globais.printMensagem("ACABOU")
+        globais.printMensagem("--------------------- FIM DA EXECUÇÃO ---------------------")
+        globais.printMensagem("Tempo mínimo de espera de passageiros na fila (s): " + str(globais.tempoEsperaMinimo))
+        globais.printMensagem("Tempo máximo de espera de passageiros na fila (s): " + str(globais.tempoEsperaMaximo))
+        globais.printMensagem("Tempo médio de espera de passageiros na fila (s): " + str(globais.somaTempoEspera/config.n))
+        
+        tempoPasseioTotal = 0
+        for carro in self.carros:
+            tempoTotal = tempoFim - carro.tempoInicio
+            globais.printMensagem("Tempo de utilização do carro " + str(carro.id) + ": " + str(carro.tempoPasseio/tempoTotal))
 
     def criarPassageiros(self): 
         for i in range (0, config.n):
