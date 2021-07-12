@@ -21,13 +21,22 @@ class Carro:
             
             self.aguardarEmbarque()
             
+            # inicia passeio
+            globais.printMensagem("++++++  Carro " + str(self.id) + " inciou o passeio.    ++++++")
+            tempoInicioPasseio = time.time()
+            
             semaforos.ordemEmbarque[0 if self.id == config.m-1 else self.id+1].release()
             
-            # inicia passeio
-            self.passear()
+            # aguarda tempo do passeio
+            time.sleep(config.tm)
             
             # garante ordem dos carros e atomiza operação de desembarque
             semaforos.ordemDesmbarque[self.id].acquire()
+            
+            # finalizar passeio
+            self.tempoPasseio += time.time() - tempoInicioPasseio
+
+            globais.printMensagem("------  Carro " + str(self.id) + " finalizou o passeio.  ------")
 
             self.aguardarDesembarque()
 
@@ -56,15 +65,3 @@ class Carro:
         
         semaforos.carroVazio.acquire()
         globais.printMensagem("Carro " + str(self.id) + " está vazio.")
-        
-    def passear(self):
-        globais.printMensagem("Carro " + str(self.id) + " inciou o passeio.")
-        
-        tempoInicioPasseio = time.time()
-        
-        time.sleep(config.tm)
-        
-        self.tempoPasseio += time.time() - tempoInicioPasseio
-        
-        globais.printMensagem("Carro " + str(self.id) + " finalizou o passeio.")
-        
