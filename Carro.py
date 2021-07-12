@@ -16,7 +16,7 @@ class Carro:
 
     def iniciar(self):
         while True:
-            # garante ordem dos carros e atomiza operação de embarque
+            # garante ordem da operação de embarque
             semaforos.ordemEmbarque[self.id].acquire()
             
             self.aguardarEmbarque()
@@ -29,13 +29,11 @@ class Carro:
             
             # aguarda tempo do passeio
             time.sleep(config.tm)
+            self.tempoPasseio += time.time() - tempoInicioPasseio
             
-            # garante ordem dos carros e atomiza operação de desembarque
+            # garante ordem da operação de desembarque
             semaforos.ordemDesmbarque[self.id].acquire()
             
-            # finalizar passeio
-            self.tempoPasseio += time.time() - tempoInicioPasseio
-
             globais.printMensagem("------  Carro " + str(self.id) + " finalizou o passeio.  ------")
 
             self.aguardarDesembarque()
