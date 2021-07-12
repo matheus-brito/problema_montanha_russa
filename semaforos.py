@@ -24,4 +24,7 @@ carroVazio = threading.Semaphore(0)     # Sinalizar que carro está vazio
 ordemPassageiros = [threading.Semaphore(0) for i in range(0, config.n)] # Garantir que passageiros embarquem na ordem da fila
 ordemPassageiros[0].release()
 
-printMsg = threading.Semaphore()        # Controlar acesso ao output
+todosOsPassageirosAtendidos = threading.Semaphore(0)  # Sinalizar que o todos os passageiros foram atendidos 
+
+printMsg = threading.Semaphore(0)                     # Controlar acesso ao output
+printMsg.release()

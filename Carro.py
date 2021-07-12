@@ -15,7 +15,7 @@ class Carro:
 
     def iniciar(self):
         while True:
-            # garante ordem dos carros
+            # garante ordem dos carros e atomiza operação de embarque
             semaforos.ordemEmbarque[self.id].acquire()
             
             self.aguardarEmbarque()
@@ -25,11 +25,18 @@ class Carro:
             # inicia passeio
             self.passear()
             
-            # garante ordem dos carros
+            # garante ordem dos carros e atomiza operação de desembarque
             semaforos.ordemDesmbarque[self.id].acquire()
-            
+
             self.aguardarDesembarque()
-            
+
+            # atualiza numPassageirosAtendidos
+            globais.numPassageirosAtendidos += config.c
+
+            # se todos os passageiros foram atendidos, libera semáforo todosOsPassageirosAtendidos
+            if(globais.numPassageirosAtendidos == config.n):
+                semaforos.todosOsPassageirosAtendidos.release()
+
             semaforos.ordemDesmbarque[0 if self.id == config.m-1 else self.id+1].release()
             
     def aguardarEmbarque(self):

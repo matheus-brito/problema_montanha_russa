@@ -12,11 +12,30 @@ import semaforos
 import globais
 
 class MontanhaRussa:
+    def __init__(self):
+        self.carros = []
+        self.threadsCarros = [] 
+        self.threadCriarPassageiros = None
+        
     def iniciar(self):
         for i in range(0, config.m):
-            threading.Thread(target=Carro(i).iniciar, args=()).start()
+            carro = Carro(i)
+            threadCarro = threading.Thread(target=carro.iniciar, args=())
             
-        threading.Thread(target=self.criarPassageiros, args=()).start()
+            self.carros.append(carro)
+            self.threadsCarros.append(threadCarro)
+            
+            threadCarro.start()
+            
+        self.threadCriarPassageiros = threading.Thread(target=self.criarPassageiros, args=())
+        
+        self.threadCriarPassageiros.start()
+        
+        self.threadCriarPassageiros.join()
+        
+        semaforos.todosOsPassageirosAtendidos.acquire()
+        
+        globais.printMensagem("ACABOU")
 
     def criarPassageiros(self): 
         for i in range (0, config.n):
