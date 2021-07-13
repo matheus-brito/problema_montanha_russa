@@ -19,7 +19,11 @@ class Carro:
             # garante ordem da operação de embarque
             semaforos.ordemEmbarque[self.id].acquire()
             
-            self.aguardarEmbarque()
+            sucesso = self.aguardarEmbarque()
+            
+            if(not sucesso):
+                semaforos.ordemEmbarque[0 if self.id == config.m-1 else self.id+1].release()
+                break
             
             # inicia passeio
             semaforos.carroEmPasseio.release(config.c)  # sinaliza para passageiros que o passeio iniciou
@@ -53,9 +57,14 @@ class Carro:
         
         time.sleep(config.te)
         
-        semaforos.carroCheio.acquire()
+        sucesso = semaforos.carroCheio.acquire(timeout=60) #timeout caso nao haja mais passageiros a atender
+        
+        if(not sucesso):
+            return False
         
         globais.printMensagem("Carro " + str(self.id) + " está cheio.")
+        
+        return True
         
     def aguardarDesembarque(self):
         semaforos.desembarque.release()    # um passgeiro desembarca por vez em qualquer ordem

@@ -3,4 +3,7 @@ import threading
 from MontanhaRussa import MontanhaRussa
 
 # Inicia thread com método iniciar da classe MontanhaRussa
-threading.Thread(target=MontanhaRussa().iniciar, args=()).start()
+threadMontanhaRussa = threading.Thread(target=MontanhaRussa().iniciar, args=())
+
+threadMontanhaRussa.start()
+threadMontanhaRussa.join()

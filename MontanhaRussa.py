@@ -36,6 +36,9 @@ class MontanhaRussa:
         semaforos.todosOsPassageirosAtendidos.acquire()
         
         self.exibirEstatisticas()
+        
+        for t in self.threadsCarros:
+            t.join()
 
     def criarPassageiros(self): 
         for i in range (0, config.n):
