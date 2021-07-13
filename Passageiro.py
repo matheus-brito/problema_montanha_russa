@@ -24,7 +24,6 @@ class Passageiro:
             globais.fila.pop(0)
             
             globais.printMensagem("Passageiro " + str(self.id) + " embarca.")
-            self.registrarTempoEspera()
             
             # se o carro está cheio, libera o semáforo carroCheio
             if(globais.numPassageirosEmbarque == config.c):
@@ -34,6 +33,10 @@ class Passageiro:
             # próximo passageiro da fila pode embarcar
             if(self.id + 1 < config.n):
                 semaforos.ordemPassageiros[self.id + 1].release()
+            
+            # quando o passeio inicia, é contabilizado tempo de espera do passageiro na fila
+            semaforos.carroEmPasseio.acquire()
+            self.registrarTempoEspera()
             
             # passageiro desembarca
             semaforos.desembarque.acquire()

@@ -18,8 +18,9 @@ ordemEmbarque[0].release()
 ordemDesmbarque = [threading.Semaphore(0) for i in range(0, config.m)]  # Garantir que carros permaneçam em ordem
 ordemDesmbarque[0].release()
 
-carroCheio = threading.Semaphore(0)     # Sinalizar que carro está cheio
-carroVazio = threading.Semaphore(0)     # Sinalizar que carro está vazio
+carroCheio = threading.Semaphore(0)         # Sinalizar que carro está cheio
+carroVazio = threading.Semaphore(0)         # Sinalizar que carro está vazio
+carroEmPasseio = threading.Semaphore(0)     # Sinalizar que carro está em passeio
 
 ordemPassageiros = [threading.Semaphore(0) for i in range(0, config.n)] # Garantir que passageiros embarquem na ordem da fila
 ordemPassageiros[0].release()

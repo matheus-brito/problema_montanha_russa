@@ -22,6 +22,7 @@ class Carro:
             self.aguardarEmbarque()
             
             # inicia passeio
+            semaforos.carroEmPasseio.release(config.c)  # sinaliza para passageiros que o passeio iniciou
             globais.printMensagem("++++++  Carro " + str(self.id) + " inciou o passeio.    ++++++")
             tempoInicioPasseio = time.time()
             
