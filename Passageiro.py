@@ -23,7 +23,7 @@ class Passageiro:
             globais.numPassageirosEmbarque += 1
             globais.fila.pop(0)
             
-            globais.printMensagem("Passageiro " + str(self.id) + " embarca.")
+            globais.printMensagem("Passageiro " + str(self.id) + " EMBARCA.")
             
             # se o carro está cheio, libera o semáforo carroCheio
             if(globais.numPassageirosEmbarque == config.c):
@@ -42,8 +42,6 @@ class Passageiro:
             semaforos.desembarque.acquire()
             
             globais.numPassageirosDesembarque += 1
-            
-            globais.printMensagem("Passageiro " + str(self.id) + " desembarca.")
             
             # se todos desembarcaram, libera o semáforo carroVazio
             if(globais.numPassageirosDesembarque == config.c):

@@ -69,6 +69,8 @@ class Carro:
     def aguardarDesembarque(self):
         semaforos.desembarque.release()    # um passgeiro desembarca por vez em qualquer ordem
         
+        globais.printMensagem("Passageiros desembarcam do Carro " + str(self.id) + "...")
+        
         time.sleep(config.te)
         
         semaforos.carroVazio.acquire()
