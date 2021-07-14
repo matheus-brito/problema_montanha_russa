@@ -54,7 +54,7 @@ class MontanhaRussa:
     def exibirEstatisticas(self): 
         tempoFim = time.time()
         
-        globais.printMensagem("--------------------- FIM DA EXECUÇÃO ---------------------")
+        globais.printMensagem("--------------------- TODOS OS PASSAGEIROS ATENDIDOS ---------------------")
         globais.printMensagem("Tempo mínimo de espera de passageiros na fila (s): " + str(globais.tempoEsperaMinimo))
         globais.printMensagem("Tempo máximo de espera de passageiros na fila (s): " + str(globais.tempoEsperaMaximo))
         globais.printMensagem("Tempo médio de espera de passageiros na fila (s): " + str(globais.somaTempoEspera/config.n))
