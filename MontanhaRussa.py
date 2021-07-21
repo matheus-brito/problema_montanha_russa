@@ -62,4 +62,4 @@ class MontanhaRussa:
         tempoPasseioTotal = 0
         for carro in self.carros:
             tempoTotal = tempoFim - carro.tempoInicio
-            globais.printMensagem("Tempo de utilização do carro " + str(carro.id) + ": " + str(carro.tempoPasseio/tempoTotal))
+            globais.printMensagem("Taxa de utilização do carro " + str(carro.id) + ": " + str(carro.tempoPasseio/tempoTotal))
