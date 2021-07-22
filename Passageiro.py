@@ -1,7 +1,5 @@
 # -*- coding: utf8 -*-
 import time
-from random import randint
-import enum 
 
 import config
 import semaforos
@@ -11,8 +9,7 @@ class Passageiro:
     
     def __init__(self, id):
         self.id = id
-        self.tempoChegada = time.time()  # tempo de chegada deste passageiro à fila 
-        self.status = PassageiroStatus.fila
+        self.tempoChegada = time.time()  # tempo de chegada deste passageiro à fila
 
     def iniciar(self):
             # garantindo embarque na ordem da fila
@@ -60,11 +57,3 @@ class Passageiro:
             globais.tempoEsperaMaximo = tempoEspera
             
         globais.somaTempoEspera += tempoEspera
-    
-    def __repr__(self):
-        return str(self.id)
-
-class PassageiroStatus(enum.Enum):
-    fila = 1
-    passeando = 2
-    concluido = 3
